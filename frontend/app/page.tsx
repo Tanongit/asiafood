@@ -8,9 +8,6 @@ export default function Page() {
       {/* Header */}
       <LandingHeader />
 
-      {/* Spacer pour le header fixe */}
-      <div className="h-20" />
-
       {/* Hero Section */}
       <HeroSection />
 

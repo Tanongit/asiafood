@@ -1,16 +1,12 @@
 import Link from 'next/link'
 
 const navLinks = [
-    { href: '/carte', label: 'CARTE' },
-    { href: '/engagements', label: 'NOS ENGAGEMENTS' },
-    { href: '/franchise', label: 'DEVENIR FRANCHISÉ' },
-    { href: '/fidelite', label: 'FIDÉLITÉ' },
-    { href: '/presse', label: 'PRESSE' },
+    { href: '/carte', label: 'À la carte' },
 ]
 
 export default function LandingHeader() {
     return (
-        <header className="fixed z-50 h-20 inset-x-0 top-0 bg-white shadow-sm">
+        <header className="fixed z-50 h-20 inset-x-0 top-0 bg-white">
             <div className="container h-full flex items-center justify-between px-6">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
@@ -24,7 +20,7 @@ export default function LandingHeader() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="text-xs font-medium text-gray-700 hover:text-orange-500 transition-colors"
+                            className="text-base font-semibold text-gray-900 hover:text-orange-500 transition-colors uppercase tracking-wide"
                         >
                             {link.label}
                         </Link>
