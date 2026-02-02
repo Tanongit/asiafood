@@ -1,6 +1,7 @@
 import LandingHeader from '@/app/components/LandingHeader'
 import ImageCarousel from '@/app/components/ImageCarousel'
 import HeroSection from '@/app/components/HeroSection'
+import Footer from '@/app/components/Footer'
 
 export default function Page() {
   return (
@@ -13,6 +14,9 @@ export default function Page() {
 
       {/* Carousel Section */}
       <ImageCarousel />
+
+      {/* Footer */}
+      <Footer />
     </>
   )
 }
