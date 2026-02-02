@@ -1,27 +1,55 @@
 export default function Footer() {
-  return (
-    <footer className="bg-gray-50 relative">
-      <div className="absolute inset-0 bg-[url(/images/tile-grid-black.png)] bg-size-[17px] opacity-20 bg-position-[0_1]" />
-      <div className="container relative">
-        <div className="flex flex-col items-center py-28 lg:flex-row">
-          <h3 className="mb-10 text-center text-4xl font-mono leading-tight tracking-tighter lg:mb-0 lg:w-1/2 lg:pr-4 lg:text-left lg:text-2xl">
-            Built with Sanity + Next.js.
-          </h3>
-          <div className="flex flex-col gap-3 items-center justify-center lg:w-1/2 lg:flex-row lg:pl-4">
-            <a
-              href="https://github.com/sanity-io/sanity-template-nextjs-clean"
-              className="rounded-full flex gap-2 font-mono whitespace-nowrap items-center bg-black hover:bg-blue focus:bg-blue py-3 px-6 text-white transition-colors duration-200"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on GitHub
-            </a>
-            <a href="https://nextjs.org/docs" className="mx-3 hover:underline font-mono">
-              Read Next.js Documentation
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  )
+    return (
+        <footer className="bg-gray-900 text-white">
+            <div className="container mx-auto px-6 py-14">
+                <div className="grid grid-cols-4 gap-4">
+                    <div>
+                        <h3 className="text-sm font-bold uppercase mb-6">Explorer</h3>
+                        <ul className="space-y-3">
+                            <li>À la carte</li>
+                            <li>À propos</li>
+                            <li>Nos engagements</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 className="text-sm font-bold uppercase mb-6">Contact</h3>
+                        <ul className="space-y-3">
+                            <li>📞 07 68 88 13 33</li>
+                            <li>📍 2 Bd Lech Walesa, Nice</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 className="text-sm font-bold uppercase mb-6">Horaires</h3>
+                        <p>Ouvert tous les jours</p>
+                        <p className="text-xl font-bold">11h - 21h</p>
+                    </div>
+                    <div>
+                        <h3 className="text-sm font-bold uppercase mb-6">Suivez-nous</h3>
+                        <ul className="space-y-3">
+                            <li>Instagram</li>
+                            <li>Facebook</li>
+                            <li>TikTok</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {/* Bas du footer */}
+            <div className="border-t border-gray-800">
+                <div className="container mx-auto px-6 py-6">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-gray-500">
+                        <p>© 2026 AsiaFood</p>
+                        <div className="flex items-center gap-6">
+                            <span>Mentions légales</span>
+                            <span>CGV</span>
+                            <span>Cookies</span>
+                        </div>
+                    </div>
+                    <div className="text-center mt-4 text-sm text-gray-500">
+                        Site réalisé par <span className="text-gray-300">DINH Tan</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    )
 }
