@@ -18,7 +18,7 @@ export default function ImageCarousel() {
     const next = () => setCurrent((i) => (i >= slides.length - 4 ? 0 : i + 1))
 
     return (
-        <section className="bg-white py-20">
+        <section className="py-20" style={{ backgroundColor: '#eed6c2' }}>
             <div className="container mx-auto px-6">
                 {/* Titre */}
                 <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
