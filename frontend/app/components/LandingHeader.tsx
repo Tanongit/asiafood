@@ -6,12 +6,12 @@ const navLinks = [
 
 export default function LandingHeader() {
     return (
-        <header className="fixed z-50 h-20 inset-x-0 top-0 bg-white">
+        <header className="fixed z-50 h-20 inset-x-0 top-0" style={{ backgroundColor: '#63483d' }}>
             <div className="container h-full flex items-center justify-between px-6">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
                     <span className="text-3xl">🍜</span>
-                    <span className="text-xl font-bold text-gray-900">ASIAFOOD</span>
+                    <span className="text-xl font-bold text-white">ASIAFOOD</span>
                 </Link>
 
                 {/* Navigation */}
@@ -20,7 +20,8 @@ export default function LandingHeader() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="text-base font-semibold text-gray-900 hover:text-orange-500 transition-colors uppercase tracking-wide"
+                            className="text-base font-semibold hover:opacity-80 transition-opacity uppercase tracking-wide"
+                            style={{ color: '#F7C815' }}
                         >
                             {link.label}
                         </Link>
