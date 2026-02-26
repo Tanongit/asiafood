@@ -1,83 +1,153 @@
-'use client'
+import Link from 'next/link'
 
-import { useState } from 'react'
-
-// Données des slides du carousel
-const slides = [
-    { id: 1, title: 'Nems traditionnels', badge: 'NOUVEAUTÉ', color: 'bg-green-500' },
-    { id: 2, title: 'Bo Bun signature', badge: '-10%', color: 'bg-red-500' },
-    { id: 3, title: 'Poulet croustillant', badge: 'OFFERT', color: 'bg-orange-500' },
-    { id: 4, title: 'Pad Thai', badge: 'TENDANCE', color: 'bg-yellow-500' },
-    { id: 5, title: 'Raviolis vapeur', badge: 'CADEAU', color: 'bg-purple-500' },
+// ───────────────────────────────────────
+// LES DONNÉES DE NOS 4 PLATS STARS
+// ───────────────────────────────────────
+// Chaque plat a : un id, un titre, un badge, une couleur de badge,
+// un chemin vers la photo, et une description.
+// Plus tard, ces données viendront de Sanity (le CMS de papa).
+const plats = [
+    {
+        id: 1,
+        title: 'Bo Bun',
+        badge: 'STAR N°1',
+        badgeColor: 'bg-red-500',
+        image: '/images/plats/bobun.png',
+        description:
+            'Notre signature ! Vermicelles de riz garnis de bœuf mariné sauté au wok, nems croustillants dorés, crudités fraîches et cacahuètes concassées.',
+    },
+    {
+        id: 2,
+        title: 'Pad Thai',
+        badge: 'TENDANCE',
+        badgeColor: 'bg-yellow-500',
+        image: '/images/plats/padthai.png',
+        description:
+            'Le plat thaï incontournable. Nouilles de riz sautées au wok à feu vif avec crevettes, œuf, légumes croquants, cacahuètes torréfiées et un filet de citron vert.',
+    },
+    {
+        id: 3,
+        title: 'Canard Laqué',
+        badge: 'CLASSIQUE',
+        badgeColor: 'bg-green-500',
+        image: '/images/plats/canard.png',
+        description:
+            'Canard rôti lentement pour une peau croustillante et une chair fondante. Servi sur un lit de riz parfumé au jasmin, nappé de notre sauce laquée maison.',
+    },
+    {
+        id: 4,
+        title: 'Phở',
+        badge: 'FAIT MAISON',
+        badgeColor: 'bg-orange-500',
+        image: '/images/plats/pho.png',
+        description:
+            'La soupe vietnamienne authentique. Un bouillon de bœuf mijoté pendant 12 heures avec badiane et cannelle, garni de nouilles de riz et herbes fraîches du marché.',
+    },
 ]
 
+// ───────────────────────────────────────
+// LE COMPOSANT (ce qui s'affiche à l'écran)
+// ───────────────────────────────────────
 export default function ImageCarousel() {
-    const [current, setCurrent] = useState(0)
-
-    const prev = () => setCurrent((i) => (i === 0 ? slides.length - 4 : i - 1))
-    const next = () => setCurrent((i) => (i >= slides.length - 4 ? 0 : i + 1))
-
     return (
+        // <section> = un bloc thématique de la page
+        // py-20 = padding vertical (espace en haut et en bas)
         <section className="py-20" style={{ backgroundColor: '#eed6c2' }}>
+
+            {/* "container mx-auto px-6" = centre le contenu avec des marges */}
             <div className="container mx-auto px-6">
-                {/* Titre */}
-                <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
-                    LES NEMS DU MOMENT
-                </h2>
 
-                {/* Carousel */}
-                <div className="relative">
-                    {/* Boutons navigation */}
-                    <button
-                        onClick={prev}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50"
+                {/* ── LIGNE 1 : Titre + Lien ── */}
+                {/* "flex justify-between" = met le titre à gauche et le lien à droite */}
+                <div className="flex items-center justify-between mb-12">
+
+                    {/* <h2> = titre de section (pas h1, car h1 c'est le hero) */}
+                    <h2
+                        className="text-3xl md:text-4xl font-bold"
+                        style={{ color: '#63483d' }}
                     >
-                        ◀
-                    </button>
+                        NOS PLATS STARS
+                    </h2>
 
-                    <button
-                        onClick={next}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50"
+                    {/* <Link> = lien Next.js vers la future page /carte */}
+                    <Link
+                        href="/carte"
+                        className="text-sm font-semibold underline underline-offset-4 hover:opacity-70 transition-opacity"
+                        style={{ color: '#63483d' }}
                     >
-                        ▶
-                    </button>
-
-                    {/* Track des images */}
-                    <div className="overflow-hidden mx-8">
-                        <div
-                            className="flex transition-transform duration-500"
-                            style={{ transform: `translateX(-${current * 25}%)` }}
-                        >
-                            {slides.map((slide) => (
-                                <div key={slide.id} className="w-1/4 flex-shrink-0 px-3">
-                                    <div className="relative bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl aspect-[3/4] overflow-hidden shadow-xl hover:scale-105 transition-transform cursor-pointer">
-                                        {/* Badge */}
-                                        <span className={`absolute top-4 left-4 ${slide.color} text-white text-xs font-bold px-3 py-1 rounded-full`}>
-                                            {slide.badge}
-                                        </span>
-
-                                        {/* Titre */}
-                                        <div className="absolute bottom-4 left-4 right-4">
-                                            <h3 className="text-white font-bold text-lg">{slide.title}</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Dots */}
-                    <div className="flex justify-center gap-2 mt-8">
-                        {[0, 1].map((i) => (
-                            <button
-                                key={i}
-                                onClick={() => setCurrent(i)}
-                                className={`w-3 h-3 rounded-full transition-all ${current === i ? 'bg-orange-500 w-8' : 'bg-gray-300'
-                                    }`}
-                            />
-                        ))}
-                    </div>
+                        Voir notre carte →
+                    </Link>
                 </div>
+
+                {/* ── LIGNE 2 : La grille de 4 cartes ── */}
+                {/* grid = affichage en grille */}
+                {/* grid-cols-1 = 1 colonne sur mobile (les cartes s'empilent) */}
+                {/* sm:grid-cols-2 = 2 colonnes sur tablette */}
+                {/* lg:grid-cols-4 = 4 colonnes sur ordinateur */}
+                {/* gap-6 = espace entre les cartes */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                    {/* .map() = "pour chaque plat dans la liste, crée une carte" */}
+                    {plats.map((plat) => (
+
+                        // Chaque carte : fond blanc, coins arrondis, ombre
+                        // hover: = "quand la souris passe dessus"
+                        // hover:-translate-y-1 = la carte monte de 1 unité au survol
+                        <div
+                            key={plat.id}
+                            className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                        >
+                            {/* ── LA PHOTO ── */}
+                            {/* "relative" = permet de positionner le badge PAR DESSUS la photo */}
+                            {/* "aspect-square" = force un format carré */}
+                            <div className="relative aspect-square overflow-hidden">
+
+                                {/* <img> = la photo du plat */}
+                                {/* src={plat.image} = le chemin vers la photo (ex: /images/plats/bobun.png) */}
+                                {/* alt={plat.title} = texte alternatif pour l'accessibilité et le SEO */}
+                                {/* object-cover = la photo remplit tout le carré sans se déformer */}
+                                <img
+                                    src={plat.image}
+                                    alt={plat.title}
+                                    className="w-full h-full object-cover"
+                                />
+
+                                {/* ── LE BADGE ── */}
+                                {/* <span> = petit bout de texte */}
+                                {/* "absolute top-4 left-4" = positionné en haut à gauche de la photo */}
+                                {/* ${plat.badgeColor} = la couleur change selon le plat (rouge, jaune, vert, orange) */}
+                                <span
+                                    className={`absolute top-4 left-4 ${plat.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm`}
+                                >
+                                    {plat.badge}
+                                </span>
+                            </div>
+
+                            {/* ── LE TEXTE SOUS LA PHOTO ── */}
+                            {/* p-5 = padding de 5 unités tout autour */}
+                            <div className="p-5">
+
+                                {/* <h3> = sous-titre (nom du plat) */}
+                                <h3
+                                    className="text-lg font-bold uppercase mb-2"
+                                    style={{ color: '#63483d' }}
+                                >
+                                    {plat.title}
+                                </h3>
+
+                                {/* <p> = paragraphe (la description) */}
+                                {/* leading-relaxed = interligne aéré pour la lisibilité */}
+                                <p
+                                    className="text-sm leading-relaxed"
+                                    style={{ color: '#8b6f63' }}
+                                >
+                                    {plat.description}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
             </div>
         </section>
     )
