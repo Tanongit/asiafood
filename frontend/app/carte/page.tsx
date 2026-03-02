@@ -15,18 +15,27 @@ export default function CartePage() {
     // La catégorie sélectionnée (par défaut : la première, "Entrées")
     const [activeCategory, setActiveCategory] = useState(menuCategories[0].id)
 
+    // Emoji et couleur de fond pour les bannières et cartes de plats
+    const categoryStyle: Record<number, { emoji: string; gradient: string }> = {
+        1: { emoji: '🥟', gradient: 'linear-gradient(135deg, #f5deb3 0%, #deb887 100%)' },
+        2: { emoji: '🍲', gradient: 'linear-gradient(135deg, #e8c9a0 0%, #d4a574 100%)' },
+        3: { emoji: '🍜', gradient: 'linear-gradient(135deg, #f0d5b8 0%, #c9956b 100%)' },
+        4: { emoji: '🥘', gradient: 'linear-gradient(135deg, #edd4b2 0%, #d4a76a 100%)' },
+        5: { emoji: '🍚', gradient: 'linear-gradient(135deg, #f5e6d0 0%, #dcc8a8 100%)' },
+        6: { emoji: '🍡', gradient: 'linear-gradient(135deg, #f7dfd0 0%, #e8b898 100%)' },
+        7: { emoji: '🥤', gradient: 'linear-gradient(135deg, #e6ddd4 0%, #c4b09c 100%)' },
+    }
+
     return (
         <div style={{ backgroundColor: '#eed6c2', minHeight: '100vh' }} className="pt-20">
 
             {/* ── Barre de navigation par catégorie ── */}
-            {/* Elle reste collée en haut quand on scrolle (sticky) */}
             <nav
                 className="sticky top-20 z-30 border-b"
                 style={{ backgroundColor: '#eed6c2', borderColor: '#d4b8a0' }}
             >
                 <div className="container mx-auto px-6 py-4">
                     <div className="flex justify-center gap-3 flex-wrap">
-                        {/* On boucle sur les catégories pour créer un onglet chacune */}
                         {menuCategories.map((cat) => (
                             <button
                                 key={cat.id}
@@ -39,13 +48,9 @@ export default function CartePage() {
                                         window.scrollTo({ top, behavior: 'smooth' })
                                     }
                                 }}
-                                className={`px-5 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-300 ${activeCategory === cat.id
-                                    ? 'text-white shadow-md'
-                                    : 'text-white/70 hover:text-white'
-                                    }`}
+                                className="px-5 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-300"
                                 style={{
-                                    backgroundColor:
-                                        activeCategory === cat.id ? '#63483d' : 'transparent',
+                                    backgroundColor: activeCategory === cat.id ? '#63483d' : 'transparent',
                                     border: activeCategory === cat.id ? 'none' : '2px solid #63483d',
                                     color: activeCategory === cat.id ? 'white' : '#63483d',
                                 }}
@@ -65,21 +70,25 @@ export default function CartePage() {
 
                         {/* ── Bannière de catégorie ── */}
                         <div
-                            className="rounded-2xl p-8 mb-8"
+                            className="rounded-2xl p-8 mb-8 flex items-center justify-between overflow-hidden"
                             style={{
                                 background: 'linear-gradient(135deg, #63483d 0%, #8b6f63 100%)',
                             }}
                         >
-                            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-wider">
-                                {cat.title}
-                            </h2>
-                            <p className="text-white/70 mt-2">
-                                {cat.dishes.length} {cat.dishes.length > 1 ? 'plats' : 'plat'}
-                            </p>
+                            <div>
+                                <h2 className="text-3xl md:text-4xl font-bold text-white tracking-wider">
+                                    {cat.title}
+                                </h2>
+                                <p className="text-white/70 mt-2">
+                                    {cat.dishes.length} {cat.dishes.length > 1 ? 'plats' : 'plat'}
+                                </p>
+                            </div>
+                            <span className="text-7xl md:text-8xl opacity-30">
+                                {categoryStyle[cat.id]?.emoji}
+                            </span>
                         </div>
 
                         {/* ── Grille des plats ── */}
-                        {/* 1 colonne mobile, 2 tablette, 3 desktop */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
                             {cat.dishes.map((dish) => (
@@ -87,19 +96,18 @@ export default function CartePage() {
                                     key={dish.id}
                                     className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                                 >
-                                    {/* ── Zone colorée (remplacée par photo plus tard) ── */}
+                                    {/* ── Zone colorée (emoji catégorie) ── */}
                                     <div
                                         className="h-40 flex items-center justify-center"
                                         style={{
-                                            background: 'linear-gradient(135deg, #f5deb3 0%, #deb887 100%)',
+                                            background: categoryStyle[cat.id]?.gradient || 'linear-gradient(135deg, #f5deb3 0%, #deb887 100%)',
                                         }}
                                     >
-                                        <span className="text-5xl">🍜</span>
+                                        <span className="text-5xl">{categoryStyle[cat.id]?.emoji || '🍜'}</span>
                                     </div>
 
                                     {/* ── Infos du plat ── */}
                                     <div className="p-5">
-                                        {/* Nom + Prix sur la même ligne */}
                                         <div className="flex justify-between items-start mb-2">
                                             <h3
                                                 className="font-bold text-lg"
