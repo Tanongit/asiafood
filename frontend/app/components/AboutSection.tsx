@@ -36,7 +36,7 @@ export default function AboutSection() {
                     className="text-2xl md:text-3xl font-bold italic leading-snug mb-6"
                     style={{ color: '#eed6c2' }}
                 >
-                    "{QUOTE}"
+                    &ldquo;{QUOTE}&rdquo;
                 </blockquote>
 
                 {/* Ligne dorée décorative */}
