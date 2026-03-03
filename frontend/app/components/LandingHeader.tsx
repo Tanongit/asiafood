@@ -15,7 +15,7 @@ export default function LandingHeader() {
                 </Link>
 
                 {/* Navigation */}
-                <nav className="flex items-center gap-6">
+                <nav className="hidden md:flex items-center gap-6">
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
