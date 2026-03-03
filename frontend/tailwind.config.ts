@@ -1,4 +1,4 @@
-import type {Config} from 'tailwindcss'
+import type { Config } from 'tailwindcss'
 import typography from '@tailwindcss/typography'
 
 export default {
@@ -9,6 +9,15 @@ export default {
       padding: '2rem',
     },
     extend: {
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 20s linear infinite',
+      },
       boxShadow: {
         layer: '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       },
