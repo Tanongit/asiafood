@@ -4,6 +4,8 @@ import Engagements from '@/app/components/Engagements'
 import CTABanner from '@/app/components/CTABanner'
 import MarqueeBanner from '@/app/components/MarqueeBanner'
 import AboutSection from '@/app/components/AboutSection'
+import LocationSection from '@/app/components/LocationSection'
+
 
 export default function Page() {
   return (
@@ -22,6 +24,10 @@ export default function Page() {
 
       {/* Notre Histoire */}
       <AboutSection />
+
+      {/* Nous Trouver */}
+      <LocationSection />
+
 
       {/* Bandeau CTA */}
       <CTABanner />
