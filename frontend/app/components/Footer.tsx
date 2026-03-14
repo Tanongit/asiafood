@@ -1,55 +1,92 @@
+import Link from 'next/link'
+
+/**
+ * Footer - Pied de page simplifié
+ * - Contact et Horaires supprimés → déjà dans LocationSection
+ * - 2 colonnes (Explorer + Suivez-nous) → propre sur mobile ET desktop
+ * - Liens sociaux en placeholder (#) → à remplacer quand les comptes sont créés
+ */
+
 export default function Footer() {
     return (
         <footer className="text-white" style={{ backgroundColor: '#63483d' }}>
+
+            {/* ── Partie principale : 2 colonnes ── */}
             <div className="container mx-auto px-6 py-14">
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 gap-8">
+
+                    {/* Explorer */}
                     <div>
-                        <h3 className="text-sm font-bold uppercase mb-6">Explorer</h3>
-                        <ul className="space-y-3">
-                            <li>À la carte</li>
-                            <li>À propos</li>
-                            <li>Nos engagements</li>
+                        <h3
+                            className="text-sm font-bold uppercase tracking-widest mb-6"
+                            style={{ color: '#F7C815' }}
+                        >
+                            Explorer
+                        </h3>
+                        <ul className="space-y-3 text-sm" style={{ color: '#eed6c2bb' }}>
+                            <li>
+                                <Link href="/carte" className="hover:opacity-80 transition-opacity">
+                                    À la carte
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/#a-propos" className="hover:opacity-80 transition-opacity">
+                                    À propos
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/#engagements" className="hover:opacity-80 transition-opacity">
+                                    Nos engagements
+                                </Link>
+                            </li>
                         </ul>
                     </div>
+
+                    {/* Suivez-nous */}
                     <div>
-                        <h3 className="text-sm font-bold uppercase mb-6">Contact</h3>
-                        <ul className="space-y-3">
-                            <li>📞 07 68 88 13 33</li>
-                            <li>📍 2 Bd Lech Walesa, Nice</li>
+                        <h3
+                            className="text-sm font-bold uppercase tracking-widest mb-6"
+                            style={{ color: '#F7C815' }}
+                        >
+                            Suivez-nous
+                        </h3>
+                        <ul className="space-y-3 text-sm" style={{ color: '#eed6c2bb' }}>
+                            <li>
+                                {/* Remplace # par le vrai lien Instagram quand disponible */}
+                                <a href="#" className="hover:opacity-80 transition-opacity">
+                                    Instagram
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" className="hover:opacity-80 transition-opacity">
+                                    Facebook
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" className="hover:opacity-80 transition-opacity">
+                                    TikTok
+                                </a>
+                            </li>
                         </ul>
                     </div>
-                    <div>
-                        <h3 className="text-sm font-bold uppercase mb-6">Horaires</h3>
-                        <p>Ouvert tous les jours</p>
-                        <p className="text-xl font-bold">11h - 21h</p>
-                    </div>
-                    <div>
-                        <h3 className="text-sm font-bold uppercase mb-6">Suivez-nous</h3>
-                        <ul className="space-y-3">
-                            <li>Instagram</li>
-                            <li>Facebook</li>
-                            <li>TikTok</li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
 
-            {/* Bas du footer */}
-            <div className="border-t border-gray-800">
-                <div className="container mx-auto px-6 py-6">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-gray-500">
-                        <p>© 2026 AsiaFood</p>
-                        <div className="flex items-center gap-6">
-                            <span>Mentions légales</span>
-                            <span>CGV</span>
-                            <span>Cookies</span>
-                        </div>
-                    </div>
-                    <div className="text-center mt-4 text-sm text-gray-500">
-                        Site réalisé par <span className="text-gray-300">DINH Tan</span>
-                    </div>
+            {/* ── Bas du footer : copyright ── */}
+            <div className="border-t" style={{ borderColor: '#ffffff20' }}>
+                <div
+                    className="container mx-auto px-6 py-6 text-center text-sm"
+                    style={{ color: '#eed6c266' }}
+                >
+                    <p>© 2026 AsiaFood · <span className="cursor-pointer hover:opacity-80">Mentions légales</span></p>
+                    <p className="mt-2">
+                        Site réalisé par{' '}
+                        <span style={{ color: '#eed6c2' }}>DINH Tan</span>
+                    </p>
                 </div>
             </div>
+
         </footer>
     )
 }
