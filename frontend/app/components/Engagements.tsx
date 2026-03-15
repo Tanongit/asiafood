@@ -1,77 +1,108 @@
 /**
- * Section "Nos Engagements"
- * 4 icônes Lucide avec texte pour rassurer le client.
- * Icônes gratuites (licence MIT) de la librairie lucide-react.
- * Catalogue complet : https://lucide.dev/icons
+ * Engagements - Section "Nos Engagements"
+ * 4 piliers avec icône, titre et description courte.
+ * id="engagements" → permet le lien #engagements depuis le footer.
+ *
+ * 📝 Pour modifier : change le tableau `engagements` ci-dessous.
  */
 
 import { ChefHat, Leaf, Truck, Soup } from 'lucide-react'
 
-// ───────────────────────────────────────
-// LES DONNÉES DES 4 ENGAGEMENTS
-// ───────────────────────────────────────
-// Chaque engagement a un id, un label (le texte), et une icône Lucide.
 const engagements = [
-    { id: 1, label: 'Fait Maison', icon: ChefHat },
-    { id: 2, label: 'Produits Frais', icon: Leaf },
-    { id: 3, label: 'Livraison Rapide', icon: Truck },
-    { id: 4, label: 'Recettes Authentiques', icon: Soup },
+    {
+        id: 1,
+        icon: ChefHat,
+        label: 'Fait Maison',
+        description: 'Chaque plat est préparé sur place, avec soin, comme à la maison.',
+    },
+    {
+        id: 2,
+        icon: Leaf,
+        label: 'Produits Frais',
+        description: 'Des ingrédients sélectionnés chaque jour pour vous servir ce qu\'il y a de mieux.',
+    },
+    {
+        id: 3,
+        icon: Soup,
+        label: 'Recettes Authentiques',
+        description: 'Des saveurs fidèles à la tradition, héritées de 30 ans de cuisine asiatique.',
+    },
+    {
+        id: 4,
+        icon: Truck,
+        label: 'Livraison Rapide',
+        description: 'Chaud, frais, livré directement chez vous. Commandez en quelques clics.',
+    },
 ]
 
-// ───────────────────────────────────────
-// LE COMPOSANT
-// ───────────────────────────────────────
 export default function Engagements() {
     return (
-        <section className="py-16" style={{ backgroundColor: '#eed6c2' }}>
+        // id="engagements" → ancre pour le lien footer "Nos engagements"
+        <section id="engagements" className="py-20" style={{ backgroundColor: '#eed6c2' }}>
             <div className="container mx-auto px-6">
 
-                {/* ── Titre ── */}
-                <h2
-                    className="text-2xl md:text-3xl font-bold text-center uppercase tracking-wider mb-12"
-                    style={{ color: '#63483d' }}
-                >
-                    Nos Engagements
-                </h2>
+                {/* ── En-tête ── */}
+                <div className="text-center mb-14">
+                    <p
+                        className="text-xs font-bold uppercase tracking-[0.3em] mb-3"
+                        style={{ color: '#63483d99' }}
+                    >
+                        Ce qui nous définit
+                    </p>
+                    <h2
+                        className="text-2xl md:text-3xl font-bold uppercase tracking-wider"
+                        style={{ color: '#63483d' }}
+                    >
+                        Nos Engagements
+                    </h2>
+                    {/* Ligne dorée décorative */}
+                    <div
+                        className="w-12 h-0.5 mx-auto mt-5"
+                        style={{ backgroundColor: '#F7C815' }}
+                    />
+                </div>
 
-                {/* ── Grille des 4 engagements ── */}
-                {/* grid-cols-2 = 2 colonnes sur mobile */}
-                {/* md:grid-cols-4 = 4 colonnes sur desktop */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-
+                {/* ── Grille 4 engagements ── */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
                     {engagements.map((item) => {
-                        // On récupère l'icône dans une variable "Icon"
-                        // La majuscule est obligatoire pour que React
-                        // comprenne que c'est un composant à afficher
                         const Icon = item.icon
-
                         return (
                             <div
                                 key={item.id}
-                                className="flex flex-col items-center text-center"
+                                className="flex flex-col items-center text-center group"
                             >
-                                {/* ── L'icône Lucide ── */}
-                                {/* size=48 = taille en pixels */}
-                                {/* strokeWidth=1.5 = épaisseur du trait (fin = élégant) */}
-                                <Icon
-                                    size={48}
-                                    strokeWidth={1.5}
-                                    className="mb-4"
-                                    style={{ color: '#63483d' }}
-                                />
+                                {/* Cercle derrière l'icône */}
+                                <div
+                                    className="w-20 h-20 rounded-full flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
+                                    style={{ backgroundColor: '#63483d15' }}
+                                >
+                                    <Icon
+                                        size={36}
+                                        strokeWidth={1.5}
+                                        style={{ color: '#63483d' }}
+                                    />
+                                </div>
 
-                                {/* ── Le texte sous l'icône ── */}
+                                {/* Titre */}
                                 <p
-                                    className="text-sm font-semibold uppercase tracking-wide"
+                                    className="text-sm font-bold uppercase tracking-wide mb-2"
                                     style={{ color: '#63483d' }}
                                 >
                                     {item.label}
                                 </p>
+
+                                {/* Description */}
+                                <p
+                                    className="text-xs leading-relaxed"
+                                    style={{ color: '#63483d99' }}
+                                >
+                                    {item.description}
+                                </p>
                             </div>
                         )
                     })}
-
                 </div>
+
             </div>
         </section>
     )
