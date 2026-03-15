@@ -34,8 +34,8 @@ export default function CartePage() {
                 className="sticky top-20 z-30 border-b"
                 style={{ backgroundColor: '#eed6c2', borderColor: '#d4b8a0' }}
             >
-                <div className="container mx-auto px-6 py-4">
-                    <div className="flex justify-center gap-3 flex-wrap">
+                <div className="container mx-auto px-3 md:px-6 py-3 md:py-4">
+                    <div className="flex justify-center gap-2 flex-wrap">
                         {menuCategories.map((cat) => (
                             <button
                                 key={cat.id}
@@ -48,7 +48,7 @@ export default function CartePage() {
                                         window.scrollTo({ top, behavior: 'smooth' })
                                     }
                                 }}
-                                className="px-5 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-300"
+                                className="px-3 md:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-semibold whitespace-nowrap transition-all duration-300"
                                 style={{
                                     backgroundColor: activeCategory === cat.id ? '#63483d' : 'transparent',
                                     border: activeCategory === cat.id ? 'none' : '2px solid #63483d',
@@ -63,27 +63,27 @@ export default function CartePage() {
             </nav>
 
             {/* ── Contenu : les catégories et leurs plats ── */}
-            <div className="container mx-auto px-6 py-10">
+            <div className="container mx-auto px-4 md:px-6 py-6 md:py-10">
 
                 {menuCategories.map((cat) => (
                     <section key={cat.id} id={`category-${cat.id}`} className="mb-16">
 
                         {/* ── Bannière de catégorie ── */}
                         <div
-                            className="rounded-2xl p-8 mb-8 flex items-center justify-between overflow-hidden"
+                            className="rounded-2xl p-5 md:p-8 mb-6 md:mb-8 flex items-center justify-between overflow-hidden"
                             style={{
                                 background: 'linear-gradient(135deg, #63483d 0%, #8b6f63 100%)',
                             }}
                         >
                             <div>
-                                <h2 className="text-3xl md:text-4xl font-bold text-white tracking-wider">
+                                <h2 className="text-2xl md:text-4xl font-bold text-white tracking-wider">
                                     {cat.title}
                                 </h2>
                                 <p className="text-white/70 mt-2">
                                     {cat.dishes.length} {cat.dishes.length > 1 ? 'plats' : 'plat'}
                                 </p>
                             </div>
-                            <span className="text-7xl md:text-8xl opacity-30">
+                            <span className="text-5xl md:text-8xl opacity-30">
                                 {categoryStyle[cat.id]?.emoji}
                             </span>
                         </div>
@@ -98,7 +98,7 @@ export default function CartePage() {
                                 >
                                     {/* ── Zone colorée (emoji catégorie) ── */}
                                     <div
-                                        className="h-40 flex items-center justify-center"
+                                        className="h-32 md:h-40 flex items-center justify-center"
                                         style={{
                                             background: categoryStyle[cat.id]?.gradient || 'linear-gradient(135deg, #f5deb3 0%, #deb887 100%)',
                                         }}
