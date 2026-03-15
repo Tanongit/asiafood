@@ -5,6 +5,7 @@ import CTABanner from '@/app/components/CTABanner'
 import MarqueeBanner from '@/app/components/MarqueeBanner'
 import AboutSection from '@/app/components/AboutSection'
 import LocationSection from '@/app/components/LocationSection'
+import SocialSection from '@/app/components/SocialSection'
 
 
 export default function Page() {
@@ -24,6 +25,9 @@ export default function Page() {
 
       {/* Notre Histoire */}
       <AboutSection />
+
+      {/* Réseaux sociaux */}
+      <SocialSection />
 
       {/* Nous Trouver */}
       <LocationSection />
