@@ -79,7 +79,7 @@ export default function Footer() {
                     className="container mx-auto px-6 py-6 text-center text-sm"
                     style={{ color: '#eed6c266' }}
                 >
-                    <p>© 2026 AsiaFood · <span className="cursor-pointer hover:opacity-80">Mentions légales</span></p>
+                    <p>© 2026 AsiaFood · <Link href="/mentions-legales" className="cursor-pointer hover:opacity-80">Mentions légales</Link></p>
                     <p className="mt-2">
                         Site réalisé par{' '}
                         <span style={{ color: '#eed6c2' }}>DINH Tan</span>
