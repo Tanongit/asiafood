@@ -1,10 +1,10 @@
 /**
  * AboutSection - Section "Notre Histoire"
  * Layout 50/50 : texte à gauche (fond marron), photo à droite.
- * Sur mobile : les deux s'empilent verticalement.
+ * id="a-propos" → permet le lien #a-propos depuis le footer.
  *
  * 📝 Pour modifier le texte : change QUOTE et DESCRIPTION ci-dessous.
- * 🖼️ Pour changer la photo : remplace /images/about-chef.png dans /public/images/
+ * 🖼️ Pour changer la photo : remplace /public/images/about-chef.png
  */
 
 const QUOTE = 'Trente ans de passion cuisinée avec amour.'
@@ -14,10 +14,11 @@ const DESCRIPTION =
 
 export default function AboutSection() {
     return (
-        // Section pleine largeur, pas de padding vertical car les deux moitiés
-        // gèrent leur propre padding intérieur
-        <section className="w-full flex flex-col md:flex-row min-h-[420px]">
-
+        // id="a-propos" → ancre pour le lien footer "À propos"
+        <section
+            id="a-propos"
+            className="w-full flex flex-col md:flex-row min-h-[420px]"
+        >
             {/* ── MOITIÉ GAUCHE : Texte sur fond marron ── */}
             <div
                 className="flex-1 flex flex-col justify-center px-10 py-16 md:px-16"
@@ -55,7 +56,6 @@ export default function AboutSection() {
             </div>
 
             {/* ── MOITIÉ DROITE : Photo ── */}
-            {/* object-cover = la photo remplit toute la moitié sans se déformer */}
             <div className="flex-1 min-h-[300px] md:min-h-0 overflow-hidden">
                 <img
                     src="/images/about-chef.png"
