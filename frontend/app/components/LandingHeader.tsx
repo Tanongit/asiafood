@@ -28,7 +28,11 @@ export default function LandingHeader() {
 
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2">
-                        <span className="text-3xl">🍜</span>
+                        <img
+                            src="/images/logo.png"
+                            alt="Asia Food"
+                            className="h-10 w-auto"
+                        />
                         <span className="text-xl font-bold text-white">ASIAFOOD</span>
                     </Link>
 
