@@ -5,7 +5,7 @@
  * Learn more: https://www.sanity.io/docs/cli
  */
 
-import {defineCliConfig} from 'sanity/cli'
+import { defineCliConfig } from 'sanity/cli'
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || '<your project ID>'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
@@ -15,6 +15,8 @@ export default defineCliConfig({
     projectId,
     dataset,
   },
-  studioHost: process.env.SANITY_STUDIO_STUDIO_HOST || '', // Visit https://www.sanity.io/docs/environment-variables to learn more about using environment variables for local & production.
-  autoUpdates: true,
+  deployment: {
+    appId: 'w4xsvpdpayefgctm8lvn8py7',
+    autoUpdates: true,
+  },
 })
