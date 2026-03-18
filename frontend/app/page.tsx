@@ -13,7 +13,15 @@ const SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
   heroSubtitle,
   heroVideoUrl,
   "heroImageUrl": heroImage.asset->url,
-  aboutText
+  aboutText,
+  instagramUrl,
+  "socialImagesUrls": socialImages[].asset->url,
+  "featuredDishesData": featuredDishes[]->{
+    _id,
+    name,
+    description,
+    "imageUrl": image.asset->url
+  }
 }`
 
 export default async function Page() {
@@ -31,14 +39,14 @@ export default async function Page() {
       {/* Nos Engagements */}
       <Engagements />
 
-      {/* Carousel Section */}
-      <ImageCarousel />
+      {/* Carousel Section connecté */}
+      <ImageCarousel settings={settings} />
 
       {/* Notre Histoire */}
       <AboutSection />
 
-      {/* Réseaux sociaux */}
-      <SocialSection />
+      {/* Réseaux sociaux connectés */}
+      <SocialSection settings={settings} />
 
       {/* Nous Trouver */}
       <LocationSection />
