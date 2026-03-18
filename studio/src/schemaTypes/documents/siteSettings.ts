@@ -31,27 +31,14 @@ export const siteSettings = defineType({
             },
         }),
         defineField({
-            name: 'aboutText',
-            title: 'Texte Notre Histoire',
-            type: 'text',
-        }),
-        defineField({
-            name: 'instagramUrl',
-            title: 'Lien du compte Instagram',
-            type: 'url',
-            description: 'Ex: https://www.instagram.com/asiafoodnice',
-        }),
-        defineField({
-            name: 'socialImages',
-            title: 'Photos pour la section Instagram',
-            type: 'array',
-            of: [{ type: 'image', options: { hotspot: true } }],
-            validation: (rule) => rule.max(4),
-            description: 'Ajoute jusqu\'à 4 photos pour la grille "Suivez-nous".',
+            name: 'marqueeText',
+            title: '2. Texte Bandelette Défilante',
+            type: 'string',
+            description: 'Texte du bandeau rouge (ex: L\'ASIE A DES TRÉSORS, ON LES MET DANS VOS BOLS ✦).',
         }),
         defineField({
             name: 'featuredDishes',
-            title: 'Plats Stars (Carousel)',
+            title: '3. Plats Stars (Carousel)',
             type: 'array',
             of: [
                 {
@@ -61,6 +48,31 @@ export const siteSettings = defineType({
             ],
             validation: (rule) => rule.max(4),
             description: 'Sélectionne 4 plats qui apparaitront dans le carousel "NOS PLATS STARS".',
+        }),
+        defineField({
+            name: 'aboutText',
+            title: '4. Texte Notre Histoire',
+            type: 'text',
+        }),
+        defineField({
+            name: 'instagramUrl',
+            title: '5. Lien du compte Instagram',
+            type: 'url',
+            description: 'Ex: https://www.instagram.com/asiafoodnice',
+        }),
+        defineField({
+            name: 'socialPosts',
+            title: '6. Photos pour la section Instagram',
+            type: 'array',
+            of: [{
+                type: 'object',
+                fields: [
+                    { name: 'image', title: 'Photo', type: 'image', options: { hotspot: true } },
+                    { name: 'caption', title: 'Texte sous la photo (optionnel)', type: 'string' },
+                ]
+            }],
+            validation: (rule) => rule.max(4),
+            description: 'Ajoute jusqu\'à 4 photos avec leur texte.',
         }),
     ],
     preview: {
