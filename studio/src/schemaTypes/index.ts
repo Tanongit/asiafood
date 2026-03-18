@@ -15,6 +15,7 @@ import { blockContent } from './objects/blockContent'
 export const schemaTypes = [
   // Singletons
   settings,
+  siteSettings,
   // Documents
   page,
   post,
