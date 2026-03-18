@@ -1,3 +1,4 @@
+import { client } from '@/sanity/lib/client'
 import ImageCarousel from '@/app/components/ImageCarousel'
 import HeroSection from '@/app/components/HeroSection'
 import Engagements from '@/app/components/Engagements'
@@ -7,12 +8,22 @@ import AboutSection from '@/app/components/AboutSection'
 import LocationSection from '@/app/components/LocationSection'
 import SocialSection from '@/app/components/SocialSection'
 
+const SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
+  restaurantName,
+  heroSubtitle,
+  heroVideoUrl,
+  "heroImageUrl": heroImage.asset->url,
+  aboutText
+}`
 
-export default function Page() {
+export default async function Page() {
+  // Téléchargement des paramètres de la page d'accueil depuis Sanity
+  const settings = await client.fetch(SETTINGS_QUERY)
+
   return (
     <>
-      {/* Hero Section */}
-      <HeroSection />
+      {/* Hero Section connectée aux données Sanity */}
+      <HeroSection settings={settings} />
 
       {/* Bandeau défilant */}
       <MarqueeBanner />
@@ -31,7 +42,6 @@ export default function Page() {
 
       {/* Nous Trouver */}
       <LocationSection />
-
 
       {/* Bandeau CTA */}
       <CTABanner />
