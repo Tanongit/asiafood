@@ -1,65 +1,85 @@
 import Link from 'next/link'
 
 // ───────────────────────────────────────
-// LES DONNÉES DE NOS 4 PLATS STARS
+// LES DONNÉES DE NOS 4 PLATS STARS (PAR DÉFAUT)
 // ───────────────────────────────────────
-// Chaque plat a : un id, un titre, un badge, une couleur de badge,
-// un chemin vers la photo, et une description.
-// Plus tard, ces données viendront de Sanity (le CMS de papa).
-const plats = [
+const defaultPlats = [
     {
-        id: 1,
+        id: '1',
         title: 'Bo Bun',
         badge: 'STAR N°1',
         badgeColor: 'bg-red-500',
         image: '/images/plats/bobun.png',
-        description:
-            'Notre signature ! Vermicelles de riz garnis de bœuf mariné sauté au wok, nems croustillants dorés, crudités fraîches et cacahuètes concassées.',
+        description: 'Notre signature ! Vermicelles de riz garnis de bœuf... etc.',
     },
     {
-        id: 2,
+        id: '2',
         title: 'Pad Thai',
         badge: 'TENDANCE',
         badgeColor: 'bg-yellow-500',
         image: '/images/plats/padthai.png',
-        description:
-            'Le plat thaï incontournable. Nouilles de riz sautées au wok à feu vif avec crevettes, œuf, légumes croquants, cacahuètes torréfiées et un filet de citron vert.',
+        description: 'Le plat thaï incontournable avec crevettes et citron vert.',
     },
     {
-        id: 3,
+        id: '3',
         title: 'Canard Laqué',
         badge: 'CLASSIQUE',
         badgeColor: 'bg-green-500',
         image: '/images/plats/canard.png',
-        description:
-            'Canard rôti lentement pour une peau croustillante et une chair fondante. Servi sur un lit de riz parfumé au jasmin, nappé de notre sauce laquée maison.',
+        description: 'Canard rôti lentement pour une peau croustillante.',
     },
     {
-        id: 4,
+        id: '4',
         title: 'Phở',
         badge: 'FAIT MAISON',
         badgeColor: 'bg-orange-500',
         image: '/images/plats/pho.png',
-        description:
-            'La soupe vietnamienne authentique. Un bouillon de bœuf mijoté pendant 12 heures avec badiane et cannelle, garni de nouilles de riz et herbes fraîches du marché.',
+        description: 'La soupe vietnamienne authentique, bouillon de bœuf.',
     },
 ]
 
-// ───────────────────────────────────────
-// LE COMPOSANT (ce qui s'affiche à l'écran)
-// ───────────────────────────────────────
-export default function ImageCarousel() {
+type DishData = {
+    _id: string;
+    name: string;
+    description: string;
+    imageUrl?: string;
+}
+
+type SiteSettings = {
+    featuredDishesData?: DishData[];
+}
+
+export default function ImageCarousel({ settings }: { settings?: SiteSettings }) {
+    // On construit les 4 plats à afficher.
+    // Si Sanity nous renvoie un plat (ex: 1er plat de l'array), on l'utilise. Sinon, on utilise le plat [0] par défaut.
+    const badges = [
+        { badge: 'STAR N°1', color: 'bg-red-500' },
+        { badge: 'TENDANCE', color: 'bg-yellow-500' },
+        { badge: 'CLASSIQUE', color: 'bg-green-500' },
+        { badge: 'FAIT MAISON', color: 'bg-orange-500' },
+    ]
+
+    const displayPlats = defaultPlats.map((defaultPlat, index) => {
+        const sanityDish = settings?.featuredDishesData?.[index]
+        if (sanityDish) {
+            return {
+                id: sanityDish._id,
+                title: sanityDish.name,
+                badge: badges[index].badge,
+                badgeColor: badges[index].color,
+                image: sanityDish.imageUrl || defaultPlat.image,
+                description: sanityDish.description || '',
+            }
+        }
+        return defaultPlat
+    })
+
     return (
-        // <section> = un bloc thématique de la page
-        // py-20 = padding vertical (espace en haut et en bas)
         <section className="py-20" style={{ backgroundColor: '#eed6c2' }}>
 
-            {/* "container mx-auto px-6" = centre le contenu avec des marges */}
             <div className="container mx-auto px-6">
 
-                {/* ── LIGNE 1 : Titre + Lien ── */}
-                {/* "flex justify-between" = met le titre à gauche et le lien à droite */}
-                <div className="flex items-center justify-between mb-12">
+                <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
 
                     {/* <h2> = titre de section (pas h1, car h1 c'est le hero) */}
                     <h2
@@ -87,8 +107,7 @@ export default function ImageCarousel() {
                 {/* gap-6 = espace entre les cartes */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                    {/* .map() = "pour chaque plat dans la liste, crée une carte" */}
-                    {plats.map((plat) => (
+                    {displayPlats.map((plat) => (
 
                         // Chaque carte : fond blanc, coins arrondis, ombre
                         // hover: = "quand la souris passe dessus"

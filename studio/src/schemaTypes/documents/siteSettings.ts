@@ -35,6 +35,33 @@ export const siteSettings = defineType({
             title: 'Texte Notre Histoire',
             type: 'text',
         }),
+        defineField({
+            name: 'instagramUrl',
+            title: 'Lien du compte Instagram',
+            type: 'url',
+            description: 'Ex: https://www.instagram.com/asiafoodnice',
+        }),
+        defineField({
+            name: 'socialImages',
+            title: 'Photos pour la section Instagram',
+            type: 'array',
+            of: [{ type: 'image', options: { hotspot: true } }],
+            validation: (rule) => rule.max(4),
+            description: 'Ajoute jusqu\'à 4 photos pour la grille "Suivez-nous".',
+        }),
+        defineField({
+            name: 'featuredDishes',
+            title: 'Plats Stars (Carousel)',
+            type: 'array',
+            of: [
+                {
+                    type: 'reference',
+                    to: [{ type: 'dish' }],
+                },
+            ],
+            validation: (rule) => rule.max(4),
+            description: 'Sélectionne 4 plats qui apparaitront dans le carousel "NOS PLATS STARS".',
+        }),
     ],
     preview: {
         prepare() {
