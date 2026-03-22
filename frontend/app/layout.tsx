@@ -26,8 +26,8 @@ export async function generateMetadata(): Promise<Metadata> {
     // Metadata should never contain stega
     stega: false,
   })
-  const title = settings?.title || demo.title
-  const description = settings?.description || demo.description
+  const title = settings?.seoTitle || "Asia Food | Le Meilleur de la Street Food"
+  const description = settings?.seoDescription || "Asia Food restaurant traiteur fast-food asiatiques, chinois, japonais, vietnamien, thaïlandais au port de nice 06."
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage)
   let metadataBase: URL | undefined = undefined
@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${title}`,
       default: title,
     },
-    description: toPlainText(description),
+    description: description,
     openGraph: {
       images: ogImage ? [ogImage] : [],
     },
