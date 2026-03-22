@@ -114,6 +114,26 @@ export const siteSettings = defineType({
             type: 'string',
             description: 'Le lien caché qui affiche la carte. (Voir tuto Google Maps Embed)',
         }),
+        defineField({
+            name: 'seoTitle',
+            title: '8a. Titre SEO (Pour Google)',
+            type: 'string',
+            description: 'Ex: Asia Food Nice | Le Meilleur de la Street Food',
+        }),
+        defineField({
+            name: 'seoDescription',
+            title: '8b. Description SEO (Pour Google)',
+            type: 'text',
+            description: 'Le petit paragraphe de résumé qui s\'affiche sous le lien dans Google (Max 160 caractères).',
+            validation: (rule) => rule.max(160),
+        }),
+        defineField({
+            name: 'ogImage',
+            title: '8c. Image de partage (WhatsApp / Facebook)',
+            type: 'image',
+            description: 'L\'image qui s\'affiche quand on envoie le lien du site à quelqu\'un.',
+            options: { hotspot: true },
+        }),
     ],
     preview: {
         prepare() {
