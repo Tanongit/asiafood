@@ -6,17 +6,31 @@
  * 📝 Pour modifier les infos : change les constantes ci-dessous.
  */
 
-const PHONE = '07 68 88 13 33'
-const HOURS = 'Ouvert 7j/7  ·  11h – 21h'
-const ADDRESS = '2 Bd Lech Walesa, 06300 Nice'
+const defaultPhone = '07 68 88 13 33'
+const defaultHours = 'Ouvert 7j/7  ·  11h – 21h'
+const defaultAddress = '2 Bd Lech Walesa, 06300 Nice'
 
 // Lien direct vers la fiche Google d'Asia Food (Place ID inclus = fiche officielle)
-const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/ASIA+FOOD/@43.7002219,7.28729,17z/data=!3m1!4b1!4m6!3m5!1s0x12cdd003661afc71:0x4c559b5c0909dfc2!8m2!3d43.7002219!4d7.28729!16s%2Fg%2F1tfh1k63'
+const defaultGoogleUrl = 'https://www.google.com/maps/place/ASIA+FOOD/@43.7002219,7.28729,17z/data=!3m1!4b1!4m6!3m5!1s0x12cdd003661afc71:0x4c559b5c0909dfc2!8m2!3d43.7002219!4d7.28729!16s%2Fg%2F1tfh1k63'
 
 // Embed par coordonnées exactes
-const GOOGLE_MAPS_EMBED = 'https://maps.google.com/maps?q=43.7002219,7.28729&output=embed&hl=fr&z=17'
+const defaultGoogleEmbed = 'https://maps.google.com/maps?q=43.7002219,7.28729&output=embed&hl=fr&z=17'
 
-export default function LocationSection() {
+type SiteSettings = {
+    locationAddress?: string;
+    locationPhone?: string;
+    locationHours?: string;
+    locationGoogleUrl?: string;
+    locationMapEmbed?: string;
+}
+
+export default function LocationSection({ settings }: { settings?: SiteSettings }) {
+    const finalAddress = settings?.locationAddress || defaultAddress;
+    const finalPhone = settings?.locationPhone || defaultPhone;
+    const finalHours = settings?.locationHours || defaultHours;
+    const finalGoogleUrl = settings?.locationGoogleUrl || defaultGoogleUrl;
+    const finalGoogleEmbed = settings?.locationMapEmbed || defaultGoogleEmbed;
+
     return (
         // Fond marron pleine largeur — les deux colonnes partagent ce fond
         <section
@@ -31,7 +45,7 @@ export default function LocationSection() {
                     style={{ height: '380px' }}
                 >
                     <iframe
-                        src={GOOGLE_MAPS_EMBED}
+                        src={finalGoogleEmbed}
                         width="100%"
                         height="100%"
                         style={{ border: 0, display: 'block' }}
@@ -72,31 +86,31 @@ export default function LocationSection() {
                 <ul className="space-y-6 mb-10">
                     <li className="flex items-start gap-4">
                         <span className="text-xl mt-0.5">📍</span>
-                        <span className="text-base leading-relaxed" style={{ color: '#eed6c2' }}>
-                            {ADDRESS}
+                        <span className="text-base leading-relaxed whitespace-pre-line" style={{ color: '#eed6c2' }}>
+                            {finalAddress}
                         </span>
                     </li>
                     <li className="flex items-center gap-4">
                         <span className="text-xl">📞</span>
                         <a
-                            href={`tel:${PHONE.replace(/\s/g, '')}`}
+                            href={`tel:${finalPhone.replace(/\s/g, '')}`}
                             className="text-base hover:underline transition-opacity hover:opacity-80"
                             style={{ color: '#eed6c2' }}
                         >
-                            {PHONE}
+                            {finalPhone}
                         </a>
                     </li>
                     <li className="flex items-center gap-4">
                         <span className="text-xl">🕐</span>
-                        <span className="text-base" style={{ color: '#eed6c2' }}>
-                            {HOURS}
+                        <span className="text-base whitespace-pre-line" style={{ color: '#eed6c2' }}>
+                            {finalHours}
                         </span>
                     </li>
                 </ul>
 
                 {/* Bouton → ouvre la fiche Google du resto */}
                 <a
-                    href={GOOGLE_MAPS_URL}
+                    href={finalGoogleUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-7 py-3 rounded-full font-bold text-sm transition-opacity hover:opacity-80 w-fit"

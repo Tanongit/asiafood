@@ -13,9 +13,20 @@ const SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
   heroSubtitle,
   heroVideoUrl,
   "heroImageUrl": heroImage.asset->url,
+  aboutQuote,
   aboutText,
+  "aboutImageUrl": aboutImage.asset->url,
+  marqueeText,
   instagramUrl,
-  "socialImagesUrls": socialImages[].asset->url,
+  locationAddress,
+  locationPhone,
+  locationHours,
+  locationGoogleUrl,
+  locationMapEmbed,
+  "socialPostsData": socialPosts[] {
+    "imageUrl": image.asset->url,
+    caption
+  },
   "featuredDishesData": featuredDishes[]->{
     _id,
     name,
@@ -23,6 +34,9 @@ const SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
     "imageUrl": image.asset->url
   }
 }`
+
+// ⚠️ Permet à Vercel de mettre à jour le site public automatiquement toutes les 60 secondes si Sanity change
+export const revalidate = 60;
 
 export default async function Page() {
   // Téléchargement des paramètres de la page d'accueil depuis Sanity
@@ -33,8 +47,8 @@ export default async function Page() {
       {/* Hero Section connectée aux données Sanity */}
       <HeroSection settings={settings} />
 
-      {/* Bandeau défilant */}
-      <MarqueeBanner />
+      {/* Bandeau défilant connecté */}
+      <MarqueeBanner settings={settings} />
 
       {/* Nos Engagements */}
       <Engagements />
@@ -42,14 +56,14 @@ export default async function Page() {
       {/* Carousel Section connecté */}
       <ImageCarousel settings={settings} />
 
-      {/* Notre Histoire */}
-      <AboutSection />
+      {/* Notre Histoire connectée */}
+      <AboutSection settings={settings} />
 
       {/* Réseaux sociaux connectés */}
       <SocialSection settings={settings} />
 
       {/* Nous Trouver */}
-      <LocationSection />
+      <LocationSection settings={settings} />
 
       {/* Bandeau CTA */}
       <CTABanner />

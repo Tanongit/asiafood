@@ -7,9 +7,15 @@
  * ⚠️ Si le texte contient une apostrophe (L'Asie), utilise les guillemets doubles "..."
  */
 
-const MARQUEE_TEXT = "✦ L'Asie a des trésors, on les met dans vos bols ✦"
+const defaultMarqueeText = "✦ L'Asie a des trésors, on les met dans vos bols ✦"
 
-export default function MarqueeBanner() {
+type SiteSettings = {
+    marqueeText?: string;
+}
+
+export default function MarqueeBanner({ settings }: { settings?: SiteSettings }) {
+    const finalText = settings?.marqueeText || defaultMarqueeText;
+
     return (
         <>
             <style>{`
@@ -46,7 +52,7 @@ export default function MarqueeBanner() {
                             className="text-xl md:text-2xl font-bold italic tracking-widest"
                             style={{ color: '#F7C815' }}
                         >
-                            {MARQUEE_TEXT}
+                            {finalText}
                         </span>
                     </div>
 
@@ -56,7 +62,7 @@ export default function MarqueeBanner() {
                             className="text-xl md:text-2xl font-bold italic tracking-widest"
                             style={{ color: '#F7C815' }}
                         >
-                            {MARQUEE_TEXT}
+                            {finalText}
                         </span>
                     </div>
 

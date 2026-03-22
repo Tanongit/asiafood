@@ -17,9 +17,14 @@ const defaultPhotos = [
     { src: '/images/social-4.png', alt: 'Ambiance Asia Food Nice' },
 ]
 
+type SocialPostData = {
+    imageUrl?: string;
+    caption?: string;
+}
+
 type SiteSettings = {
     instagramUrl?: string;
-    socialImagesUrls?: string[];
+    socialPostsData?: SocialPostData[];
 }
 
 export default function SocialSection({ settings }: { settings?: SiteSettings }) {
@@ -28,10 +33,11 @@ export default function SocialSection({ settings }: { settings?: SiteSettings })
 
     // On construit le tableau des 4 photos (mélange de Sanity et de fallback)
     const displayPhotos = defaultPhotos.map((defaultPhoto, index) => {
-        const sanityUrl = settings?.socialImagesUrls?.[index]
+        const sanityPost = settings?.socialPostsData?.[index]
         return {
-            src: sanityUrl || defaultPhoto.src,
-            alt: defaultPhoto.alt
+            src: sanityPost?.imageUrl || defaultPhoto.src,
+            alt: defaultPhoto.alt,
+            caption: sanityPost?.caption || ''
         }
     })
 
@@ -69,23 +75,30 @@ export default function SocialSection({ settings }: { settings?: SiteSettings })
             {/* gap-2 = petit écart entre les photos, comme Instagram */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-w-4xl mx-auto">
                 {displayPhotos.map((photo, index) => (
-                    // Chaque photo est un lien vers Instagram
-                    <a
-                        key={index}
-                        href={finalInstagramUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block aspect-square overflow-hidden group"
-                        style={{ borderRadius: '8px' }}
-                    >
-                        <img
-                            src={photo.src}
-                            alt={photo.alt}
-                            // object-cover = remplit le carré sans se déformer
-                            // group-hover:scale-105 = zoom léger au survol
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                    </a>
+                    // Chaque élément de la grille contient l'image et le texte (caption)
+                    <div key={index} className="flex flex-col gap-2">
+                        <a
+                            href={finalInstagramUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block aspect-square overflow-hidden group"
+                            style={{ borderRadius: '8px' }}
+                        >
+                            <img
+                                src={photo.src}
+                                alt={photo.alt}
+                                // object-cover = remplit le carré sans se déformer
+                                // group-hover:scale-105 = zoom léger au survol
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                        </a>
+                        {/* Si une légende est définie dans Sanity, on l'affiche */}
+                        {photo.caption && (
+                            <p className="text-sm font-medium text-center px-2 line-clamp-2" style={{ color: '#63483d' }}>
+                                {photo.caption}
+                            </p>
+                        )}
+                    </div>
                 ))}
             </div>
 

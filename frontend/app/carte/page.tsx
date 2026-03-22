@@ -22,6 +22,8 @@ const MENU_QUERY = `*[_type == "category"] | order(id asc) {
     }
 }`
 
+export const revalidate = 60;
+
 export default async function CartePage() {
     // 2. On exécute la requête sur le Cloud Vercel/Sanity (côté serveur très rapide)
     const categoriesFromSanity = await client.fetch(MENU_QUERY)

@@ -7,12 +7,21 @@
  * 🖼️ Pour changer la photo : remplace /public/images/about-chef.png
  */
 
-const QUOTE = 'Trente ans de passion cuisinée avec amour.'
+const defaultQuote = 'Trente ans de passion cuisinée avec amour.'
+const defaultDescription = "Originaire du Vietnam et installée à Nice depuis bientôt 30 ans, notre famille a fait de la cuisine son âme. C'est maman qui règne en cuisine, perpétuant des recettes transmises de génération en génération et faisant voyager vos papilles à travers toute l'Asie. Et c'est papa qui veille sur tout le reste avec la rigueur de celui qui sait que les bons plats méritent une maison irréprochable."
 
-const DESCRIPTION =
-    "Originaire du Vietnam et installée à Nice depuis bientôt 30 ans, notre famille a fait de la cuisine son âme. C'est maman qui règne en cuisine, perpétuant des recettes transmises de génération en génération et faisant voyager vos papilles à travers toute l'Asie. Et c'est papa qui veille sur tout le reste avec la rigueur de celui qui sait que les bons plats méritent une maison irréprochable."
+type SiteSettings = {
+    aboutQuote?: string;
+    aboutText?: string;
+    aboutImageUrl?: string;
+}
 
-export default function AboutSection() {
+export default function AboutSection({ settings }: { settings?: SiteSettings }) {
+    // Les valeurs finales (soit Sanity, soit le texte de secours)
+    const finalQuote = settings?.aboutQuote || defaultQuote;
+    const finalDescription = settings?.aboutText || defaultDescription;
+    const finalImage = settings?.aboutImageUrl || "/images/about-chef.png";
+
     return (
         // id="a-propos" → ancre pour le lien footer "À propos"
         <section
@@ -37,7 +46,7 @@ export default function AboutSection() {
                     className="text-2xl md:text-3xl font-bold italic leading-snug mb-6"
                     style={{ color: '#eed6c2' }}
                 >
-                    &ldquo;{QUOTE}&rdquo;
+                    &ldquo;{finalQuote}&rdquo;
                 </blockquote>
 
                 {/* Ligne dorée décorative */}
@@ -47,18 +56,19 @@ export default function AboutSection() {
                 />
 
                 {/* Texte descriptif */}
+                {/* whitespace-pre-line = autorise les retours à la ligne faits depuis Sanity */}
                 <p
-                    className="text-base leading-relaxed max-w-md"
+                    className="text-base leading-relaxed max-w-md whitespace-pre-line"
                     style={{ color: '#eed6c2cc' }}
                 >
-                    {DESCRIPTION}
+                    {finalDescription}
                 </p>
             </div>
 
             {/* ── MOITIÉ DROITE : Photo ── */}
             <div className="flex-1 min-h-[300px] md:min-h-0 overflow-hidden">
                 <img
-                    src="/images/about-chef.png"
+                    src={finalImage}
                     alt="Notre chef en cuisine"
                     className="w-full h-full object-cover object-center"
                 />
