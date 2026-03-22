@@ -50,9 +50,21 @@ export const siteSettings = defineType({
             description: 'Sélectionne 4 plats qui apparaitront dans le carousel "NOS PLATS STARS".',
         }),
         defineField({
+            name: 'aboutQuote',
+            title: '4a. Citation / Sous-titre Notre Histoire',
+            type: 'string',
+            description: 'Ex: Trente ans de passion cuisinée avec amour.',
+        }),
+        defineField({
             name: 'aboutText',
-            title: '4. Texte Notre Histoire',
+            title: '4b. Texte Notre Histoire',
             type: 'text',
+        }),
+        defineField({
+            name: 'aboutImage',
+            title: '4c. Photo Notre Histoire',
+            type: 'image',
+            options: { hotspot: true },
         }),
         defineField({
             name: 'instagramUrl',
@@ -73,6 +85,34 @@ export const siteSettings = defineType({
             }],
             validation: (rule) => rule.max(4),
             description: 'Ajoute jusqu\'à 4 photos avec leur texte.',
+        }),
+        defineField({
+            name: 'locationAddress',
+            title: '7a. Adresse du restaurant',
+            type: 'string',
+        }),
+        defineField({
+            name: 'locationPhone',
+            title: '7b. Numéro de téléphone',
+            type: 'string',
+        }),
+        defineField({
+            name: 'locationHours',
+            title: '7c. Horaires d\'ouverture',
+            type: 'string',
+            description: 'Ex: Ouvert 7j/7  ·  11h – 21h',
+        }),
+        defineField({
+            name: 'locationGoogleUrl',
+            title: '7d. Lien direct vers la fiche Google Maps',
+            type: 'url',
+            description: 'Le lien du bouton "Ouvrir dans Google Maps',
+        }),
+        defineField({
+            name: 'locationMapEmbed',
+            title: '7e. Lien direct d\'intégration Google Map (Embed)',
+            type: 'string',
+            description: 'Le lien caché qui affiche la carte. (Voir tuto Google Maps Embed)',
         }),
     ],
     preview: {
