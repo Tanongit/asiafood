@@ -6,6 +6,8 @@
  * 📝 Pour modifier le texte : change QUOTE et DESCRIPTION ci-dessous.
  * 🖼️ Pour changer la photo : remplace /public/images/about-chef.png
  */
+import Image from 'next/image'
+
 
 const defaultQuote = 'Trente ans de passion cuisinée avec amour.'
 const defaultDescription = "Originaire du Vietnam et installée à Nice depuis bientôt 30 ans, notre famille a fait de la cuisine son âme. C'est maman qui règne en cuisine, perpétuant des recettes transmises de génération en génération et faisant voyager vos papilles à travers toute l'Asie. Et c'est papa qui veille sur tout le reste avec la rigueur de celui qui sait que les bons plats méritent une maison irréprochable."
@@ -66,11 +68,13 @@ export default function AboutSection({ settings }: { settings?: SiteSettings }) 
             </div>
 
             {/* ── MOITIÉ DROITE : Photo ── */}
-            <div className="flex-1 min-h-[300px] md:min-h-0 overflow-hidden">
-                <img
+            <div className="flex-1 relative min-h-[400px] md:min-h-0 overflow-hidden">
+                <Image
                     src={finalImage}
-                    alt="Notre chef en cuisine"
-                    className="w-full h-full object-cover object-center"
+                    alt="Notre histoire"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover object-center"
                 />
             </div>
 
