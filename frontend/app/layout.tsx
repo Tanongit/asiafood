@@ -31,13 +31,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage)
   let metadataBase: URL | undefined = undefined
-  try {
-    metadataBase = settings?.ogImage?.metadataBase
-      ? new URL(settings.ogImage.metadataBase)
-      : undefined
-  } catch {
-    // ignore
-  }
   return {
     metadataBase,
     title: {
