@@ -15,7 +15,7 @@ const SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
   "heroImageUrl": heroImage.asset->url,
   aboutQuote,
   aboutText,
-  "aboutImageUrl": aboutImage.asset->url,
+  aboutImage,
   marqueeText,
   instagramUrl,
   locationAddress,
