@@ -2,6 +2,7 @@
  * HeroSection - Section 1 : Vidéo de présentation plein écran
  * Connectée à Sanity !
  */
+import Image from 'next/image'
 
 type HeroSettings = {
     restaurantName?: string;
@@ -22,10 +23,12 @@ export default function HeroSection({ settings }: { settings?: HeroSettings }) {
             {/* COUCHE 1 : Vidéo ou Image de fond */}
             {imageUrl && !settings?.heroVideoUrl ? (
                 // S'il a uploadé une IMAGE dans Sanity et laissé la vidéo vide, on affiche l'image
-                <img
+                <Image
                     src={imageUrl}
                     alt={title}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    priority
                 />
             ) : (
                 // Sinon on garde notre super vidéo Wok.mp4 (ou une autre vidéo Sanity)

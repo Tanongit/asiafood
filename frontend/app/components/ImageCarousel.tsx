@@ -1,5 +1,5 @@
 import Link from 'next/link'
-
+import Image from 'next/image'
 // ───────────────────────────────────────
 // LES DONNÉES DE NOS 4 PLATS STARS (PAR DÉFAUT)
 // ───────────────────────────────────────
@@ -125,10 +125,12 @@ export default function ImageCarousel({ settings }: { settings?: SiteSettings })
                                 {/* src={plat.image} = le chemin vers la photo (ex: /images/plats/bobun.png) */}
                                 {/* alt={plat.title} = texte alternatif pour l'accessibilité et le SEO */}
                                 {/* object-cover = la photo remplit tout le carré sans se déformer */}
-                                <img
+                                <Image
                                     src={plat.image}
-                                    alt={plat.title}
-                                    className="w-full h-full object-cover"
+                                    alt={plat.title || 'Plat'}
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 768px) 100vw, 33vw"
                                 />
 
                                 {/* ── LE BADGE ── */}

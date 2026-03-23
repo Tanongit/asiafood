@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 export type Dish = {
     _id: string
@@ -110,7 +111,9 @@ export default function CarteClient({ initialCategories }: { initialCategories: 
                                 >
                                     {/* ── Zone colorée / Image ── */}
                                     {dish.imageUrl ? (
-                                        <img src={dish.imageUrl} alt={dish.name} className="h-32 md:h-40 w-full object-cover" />
+                                        <div className="relative h-32 md:h-40 w-full">
+                                            <Image src={dish.imageUrl} alt={dish.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                                        </div>
                                     ) : (
                                         <div
                                             className="h-32 md:h-40 flex items-center justify-center"

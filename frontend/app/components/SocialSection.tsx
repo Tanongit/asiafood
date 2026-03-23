@@ -5,6 +5,7 @@
  * 📸 Pour remplacer les photos : mets tes vraies photos dans /public/images/social-1.png à social-4.png
  * 🔗 Pour mettre le vrai lien Instagram : change INSTAGRAM_URL ci-dessous
  */
+import Image from 'next/image'
 
 // ⚠️ Valeurs par défaut si Sanity est vide
 const defaultInstagramUrl = 'https://www.instagram.com/asiafoodnice'
@@ -81,15 +82,17 @@ export default function SocialSection({ settings }: { settings?: SiteSettings })
                             href={finalInstagramUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="block aspect-square overflow-hidden group"
+                            className="block relative aspect-square overflow-hidden group"
                             style={{ borderRadius: '8px' }}
                         >
-                            <img
+                            <Image
                                 src={photo.src}
                                 alt={photo.alt}
+                                fill
+                                sizes="(max-width: 768px) 50vw, 25vw"
                                 // object-cover = remplit le carré sans se déformer
                                 // group-hover:scale-105 = zoom léger au survol
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                className="object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                         </a>
                         {/* Si une légende est définie dans Sanity, on l'affiche */}

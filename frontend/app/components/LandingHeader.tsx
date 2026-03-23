@@ -8,6 +8,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import Image from 'next/image'
 import { X } from 'lucide-react'
 
 const UBER_EATS_URL = 'https://www.ubereats.com/fr/store/asia-food/BAqvtqmpTLu6PfoT928sAQ'
@@ -28,9 +29,11 @@ export default function LandingHeader() {
 
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2">
-                        <img
+                        <Image
                             src="/images/logo.png"
                             alt="Asia Food"
+                            width={40}
+                            height={40}
                             className="h-10 w-auto"
                         />
                         <span className="text-xl font-bold text-white">ASIAFOOD</span>
