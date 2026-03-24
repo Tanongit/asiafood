@@ -13,6 +13,8 @@ const SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
   heroSubtitle,
   heroVideoUrl,
   "heroImageUrl": heroImage.asset->url,
+  seoCuisine,
+  seoPrice,
   aboutQuote,
   aboutText,
   aboutImage,
@@ -42,8 +44,29 @@ export default async function Page() {
   // Téléchargement des paramètres de la page d'accueil depuis Sanity
   const settings = await client.fetch(SETTINGS_QUERY)
 
+  // 🤖 SEO MOTEUR CACHÉ : Injection des "Données Structurées" pour l'Algorithme Google Maps !
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Restaurant',
+    name: settings?.restaurantName || 'Restaurant Asiatique',
+    image: settings?.heroImageUrl || '',
+    telephone: settings?.locationPhone || '',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: settings?.locationAddress || '',
+      addressLocality: 'Nice',
+      addressCountry: 'FR',
+    },
+    servesCuisine: settings?.seoCuisine || 'Restaurant Asiatique',
+    priceRange: settings?.seoPrice || '€€',
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section connectée aux données Sanity */}
       <HeroSection settings={settings} />
 
