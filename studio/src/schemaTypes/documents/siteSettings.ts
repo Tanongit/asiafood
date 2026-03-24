@@ -56,6 +56,19 @@ export const siteSettings = defineType({
             description: 'Ex: Trente ans de passion cuisinée avec amour.',
         }),
         defineField({
+            name: 'seoCuisine',
+            title: '📡 [SEO] Type de Cuisine (Ex: Italienne, Vietnamienne, Burger...)',
+            type: 'string',
+            description: 'Ce mot-clé sera lu par l\'algorithme Google Maps.',
+            initialValue: 'Asiatique'
+        }),
+        defineField({
+            name: 'seoPrice',
+            title: '📡 [SEO] Fourchette de Prix (Ex: €, €€, ou €€€)',
+            type: 'string',
+            initialValue: '€€'
+        }),
+        defineField({
             name: 'aboutText',
             title: '4b. Texte Notre Histoire',
             type: 'text',
