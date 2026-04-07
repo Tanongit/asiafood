@@ -30,9 +30,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = settings?.seoDescription || "Asia Food restaurant traiteur fast-food asiatiques, chinois, japonais, vietnamien, thaïlandais au port de nice 06."
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage)
-  let metadataBase: URL | undefined = undefined
   return {
-    metadataBase,
+    metadataBase: new URL('https://asiafood79.com'),
     title: {
       template: `%s | ${title}`,
       default: title,
@@ -54,7 +53,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled: isDraftMode } = await draftMode()
 
   return (
-    <html lang="en" className={`${inter.variable} text-black`} style={{ backgroundColor: '#eed6c2' }}>
+    <html lang="fr" className={`${inter.variable} text-black`} style={{ backgroundColor: '#eed6c2' }}>
       <body>
         <section className="min-h-screen">
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
